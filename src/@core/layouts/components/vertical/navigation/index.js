@@ -16,6 +16,9 @@ import Drawer from './Drawer'
 import VerticalNavItems from './VerticalNavItems'
 import VerticalNavHeader from './VerticalNavHeader'
 
+// ** Navigation Imports
+import VerticalNavItemDatas from 'src/navigation/vertical'
+
 // ** Util Import
 import { hexToRGBA } from 'src/@core/utils/hex-to-rgba'
 
@@ -82,14 +85,12 @@ const Navigation = props => {
     }
   }
   const ScrollWrapper = hidden ? Box : PerfectScrollbar
+  console.log(props)
 
   return (
     <Drawer toggleNavVisibility={toggleNavVisibility} {...props}>
       <VerticalNavHeader toggleNavVisibility={props.toggleNavVisibility} {...props} />
       <Box>
-        {/* <ScrollWrapper
-          containerRef={ref => handleInfiniteScroll(ref)}
-        > */}
         {beforeVerticalNavMenuContent ? beforeVerticalNavMenuContent(props) : null}
         <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
           {userVerticalNavMenuContent ? (
@@ -106,9 +107,7 @@ const Navigation = props => {
             </List>
           )}
         </Box>
-        {/* </ScrollWrapper> */}
       </Box>
-      {/* {afterVerticalNavMenuContent ? afterVerticalNavMenuContent(props) : null} */}
       <Button
         variant='contained'
         sx={{
@@ -122,6 +121,26 @@ const Navigation = props => {
       >
         Connect Wallet
       </Button>
+
+      <Button
+        variant='contained'
+        sx={{
+          mt: 8,
+          mx: 3.75,
+          borderRadius: '26px',
+          background: 'linear-gradient(180deg, #007E05 0%, #000000 100%);',
+          fontWeight: 700,
+          backgroundColor: '#fff'
+        }}
+      >
+        BwkQ...prW7
+      </Button>
+
+        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <List className='nav-items' sx={{ transition: 'padding .25s ease', mx: 3.75, py: 1 }}>
+            <VerticalNavItems {...props} verticalNavItems={VerticalNavItemDatas('user')} />
+          </List>
+        </Box>
     </Drawer>
   )
 }

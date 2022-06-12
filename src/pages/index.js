@@ -45,9 +45,11 @@ const TabName = styled('span')(({ theme }) => ({
 
 const Dashboard = () => {
   const [value, setValue] = useState('1')
+
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
+
   return (
     <ApexChartWrapper
       sx={{
@@ -172,6 +174,7 @@ const Dashboard = () => {
                       fontWeight: 700,
                       paddingTop: '27px',
                       paddingBottom: '21px'
+
                       // padding: "21px 16px !important",
                       // paddingBottom: "21px",
                     }}

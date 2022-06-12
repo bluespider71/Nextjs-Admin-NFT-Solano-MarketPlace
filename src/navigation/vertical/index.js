@@ -9,81 +9,79 @@ import CreditCardOutline from 'mdi-material-ui/CreditCardOutline'
 import AccountPlusOutline from 'mdi-material-ui/AccountPlusOutline'
 import AlertCircleOutline from 'mdi-material-ui/AlertCircleOutline'
 import GoogleCirclesExtended from 'mdi-material-ui/GoogleCirclesExtended'
-import SvgIconStyle from "../../@core/components/SvgIconStyle"
+import SvgIconStyle from '../../@core/components/SvgIconStyle'
 import { FaHome } from 'react-icons/fa'
 import { FaShoppingCart } from 'react-icons/fa'
 
-
 function Komodo_Express() {
   return (
-    <SvgIconStyle src={"/icons/Komodo_Express.svg"} sx={{
-      width: "20px",
-      height: "20px",
-    }} />
+    <SvgIconStyle
+      src={'/icons/Komodo_Express.svg'}
+      sx={{
+        width: '20px',
+        height: '20px'
+      }}
+    />
   )
 }
 
-const navigation = () => {
-  return [
-    {
-      title: 'Home',
-      icon: FaHome,
-      path: '/'
-    },
-    {
-      title: 'Marketplace',
-      icon: FaShoppingCart,
-      path: '/market-place'
-    },
-    // {
-    //   sectionTitle: 'Pages'
-    // },
-    {
-      title: 'Komodo Express',
-      icon: Komodo_Express,
-      path: '/typography',
-    },
-    // {
-    //   title: 'Register',
-    //   icon: AccountPlusOutline,
-    //   path: '/pages/register',
-    //   openInNewTab: true
-    // },
-    // {
-    //   title: 'Error',
-    //   icon: AlertCircleOutline,
-    //   path: '/pages/error',
-    //   openInNewTab: true
-    // },
-    // {
-    //   sectionTitle: 'User Interface'
-    // },
-    // {
-    //   title: 'Typography',
-    //   icon: FormatLetterCase,
-    //   path: '/typography'
-    // },
-    // {
-    //   title: 'Icons',
-    //   path: '/icons',
-    //   icon: GoogleCirclesExtended
-    // },
-    // {
-    //   title: 'Cards',
-    //   icon: CreditCardOutline,
-    //   path: '/cards'
-    // },
-    // {
-    //   title: 'Tables',
-    //   icon: Table,
-    //   path: '/tables'
-    // },
-    // {
-    //   icon: CubeOutline,
-    //   title: 'Form Layouts',
-    //   path: '/form-layouts'
-    // }
-  ]
+function Account() {
+  return (
+    <SvgIconStyle
+      src={'/icons/Account.svg'}
+      sx={{
+        width: '20px',
+        height: '20px'
+      }}
+    />
+  )
+}
+
+function Inventory() {
+  return (
+    <SvgIconStyle
+      src={'/icons/Inventory.svg'}
+      sx={{
+        width: '20px',
+        height: '20px'
+      }}
+    />
+  )
+}
+
+const navigation = auth => {
+  if (auth == 'guest') {
+    return [
+      {
+        title: 'Home',
+        icon: FaHome,
+        path: '/'
+      },
+      {
+        title: 'Marketplace',
+        icon: FaShoppingCart,
+        path: '/market-place'
+      },
+      {
+        title: 'Komodo Express',
+        icon: Komodo_Express,
+        path: '/typography'
+      }
+    ]
+  } else if (auth == 'user') {
+    return [
+      {
+        title: 'Account',
+        icon: Account,
+        path: '/account'
+      },
+      {
+        title: 'Inventory',
+        icon: Inventory,
+        path: '/market-place'
+      },
+    ]
+  }
 }
 
 export default navigation
