@@ -11,17 +11,23 @@ import { styled } from '@mui/material/styles'
 import MuiTab from '@mui/material/Tab'
 
 // ** Icons Imports
-import AccountOutline from 'mdi-material-ui/AccountOutline'
 import LockOpenOutline from 'mdi-material-ui/LockOpenOutline'
 import InformationOutline from 'mdi-material-ui/InformationOutline'
+import { FaShoppingCart } from 'react-icons/fa'
 
 // ** Demo Tabs Imports
 import TabInfo from 'src/views/account-settings/TabInfo'
 import TabAccount from 'src/views/account-settings/TabAccount'
 import TabSecurity from 'src/views/account-settings/TabSecurity'
 
+
+import Komodos from 'src/views/market-place/Komodos'
+
+
+
 // ** Third Party Styles Imports
 import 'react-datepicker/dist/react-datepicker.css'
+import { Typography } from '@mui/material'
 
 const Tab = styled(MuiTab)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
@@ -41,63 +47,117 @@ const TabName = styled('span')(({ theme }) => ({
   }
 }))
 
-const AccountSettings = () => {
+const MarketPlace = () => {
   // ** State
-  const [value, setValue] = useState('account')
+  const [marketplaceTabItemValue, setMarketplaceTabItemValue] = useState("1")
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
+  const handleChangeMarketplaceTabItemValue = (event, newValue) => {
+    setMarketplaceTabItemValue(newValue)
   }
 
+  const tabNames = ['Komodos', 'Items', 'Gacha Heroes', 'Land']
+
   return (
-    <Card>
-      <TabContext value={value}>
-        <TabList
-          onChange={handleChange}
-          aria-label='account-settings tabs'
-          sx={{ borderBottom: theme => `1px solid ${theme.palette.divider}` }}
+    <Box
+      sx={{
+        pt: '32.4px'
+      }}
+    >
+      <Box
+        sx={{
+          ml: 8.5
+        }}
+      >
+        <Box
+          sx={{
+            lineHeight: '26px',
+            verticalAlign: 'middle',
+            display: 'inline-block',
+            marginRight: 2.25
+          }}
         >
-          <Tab
-            value='account'
-            label={
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <AccountOutline />
-                <TabName>Account</TabName>
-              </Box>
-            }
+          <FaShoppingCart
+            style={{
+              color: '#039700',
+              width: '31px',
+              height: '29.36px'
+            }}
           />
-          <Tab
-            value='security'
-            label={
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <LockOpenOutline />
-                <TabName>Security</TabName>
-              </Box>
+        </Box>
+
+        <Box
+          sx={{
+            display: 'inline-block'
+          }}
+        >
+          <Typography
+            variant='body1'
+            sx={{
+              fontStyle: 'normal',
+              fontWeight: 800,
+              fontSize: '24px',
+              lineHeight: '29px',
+              color: '#FFFFFF'
+            }}
+          >
+            Marketplace
+          </Typography>
+        </Box>
+      </Box>
+      <TabContext value={marketplaceTabItemValue}>
+        <TabList
+          onChange={handleChangeMarketplaceTabItemValue}
+          aria-label='account-settings tabs'
+          sx={{
+            borderBottom: theme => `1px solid #CBCBCB`,
+            mt: 4,
+            ' > .MuiTabs-fixed': {
+              ml: 6
             }
-          />
-          <Tab
-            value='info'
-            label={
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <InformationOutline />
-                <TabName>Info</TabName>
-              </Box>
-            }
-          />
+          }}
+        >
+          {tabNames.map((name, i) => {
+            return (
+              <Tab
+                value={(i + 1).toString()}
+                key={i}
+                sx={{
+                  py: 3.5,
+                  px: 4.75
+                }}
+                label={
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <img
+                      src={'/assets/images/marketplace-tab-icon.png'}
+                      alt='marketplace-tab-icon'
+                      width={24}
+                      height={24}
+                    />
+                    <TabName
+                      sx={{
+                        marginLeft: 1.75,
+                        textTransform: 'initial',
+                        color: marketplaceTabItemValue == i + 1 ? '#fff' : '#777777'
+                      }}
+                    >
+                      {name}
+                    </TabName>
+                  </Box>
+                }
+              />
+            )
+          })}
         </TabList>
 
-        <TabPanel sx={{ p: 0 }} value='account'>
-          <TabAccount />
+        <TabPanel sx={{ p: 0 }} value='1'>
+          <Komodos></Komodos>
         </TabPanel>
-        <TabPanel sx={{ p: 0 }} value='security'>
-          <TabSecurity />
-        </TabPanel>
-        <TabPanel sx={{ p: 0 }} value='info'>
-          <TabInfo />
-        </TabPanel>
+        <TabPanel sx={{ p: 0 }} value='2'></TabPanel>
+        <TabPanel sx={{ p: 0 }} value='3'></TabPanel>
+        <TabPanel sx={{ p: 0 }} value='4'></TabPanel>
       </TabContext>
-    </Card>
+    </Box>
   )
 }
 
-export default AccountSettings
+export default MarketPlace

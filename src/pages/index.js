@@ -79,7 +79,8 @@ const Dashboard = () => {
       sx={{
         mt: '23px',
         ml: '10px',
-        mr: '27px'
+        mr: '27px',
+        p: 6
       }}
     >
       <Grid container spacing={7}>
