@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import useMediaQuery from '@mui/material/useMediaQuery'
+
 // ** MUI Imports
 import Grid from '@mui/material/Grid'
 import Link from '@mui/material/Link'
@@ -11,6 +13,7 @@ import TabPanel from '@mui/lab/TabPanel'
 import TabContext from '@mui/lab/TabContext'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
+
 // ** Icons Imports
 import Poll from 'mdi-material-ui/Poll'
 import CurrencyUsd from 'mdi-material-ui/CurrencyUsd'
@@ -34,6 +37,11 @@ import SalesByCountries from 'src/views/dashboard/SalesByCountries'
 import { styled } from '@mui/material/styles'
 import SvgIconStyle from '../@core/components/SvgIconStyle'
 
+// **
+import RecentListTabs from 'src/views/home/RecentListTabs'
+
+import RecentTransaction from 'src/views/home/RecentTransaction'
+
 const TabName = styled('span')(({ theme }) => ({
   lineHeight: 1.71,
   fontSize: '0.875rem',
@@ -44,11 +52,27 @@ const TabName = styled('span')(({ theme }) => ({
 }))
 
 const Dashboard = () => {
-  const [value, setValue] = useState('1')
+  const [totalByDays, setTotalByDays] = useState('1')
+  const [recentListTable, setRecentListTable] = useState('1')
+  const [recentTransactionTable, setRecentTransactionTable] = useState('1')
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
+  // const [value, setValue] = useState('1')
+
+  const handleChangeTotalByDays = (event, newvalue) => {
+    setTotalByDays(newvalue)
   }
+
+  const handleChangeRecentListTable = (event, newvalue) => {
+    setRecentListTable(newvalue)
+  }
+
+  const handleChangeRecentTransactionTable = (event, newvalue) => {
+    setRecentTransactionTable(newvalue)
+  }
+
+  const hiddenmd = useMediaQuery(theme => theme.breakpoints.down('md'))
+  const hiddenlg = useMediaQuery(theme => theme.breakpoints.down('lg'))
+  const hiddensm = useMediaQuery(theme => theme.breakpoints.down('sm'))
 
   return (
     <ApexChartWrapper
@@ -66,25 +90,37 @@ const Dashboard = () => {
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat',
               width: '100%',
-              minHeight: '190px',
               border: '3px solid #FFFFFF'
             }}
           >
             <Typography
               variant='subtitle1'
-              sx={{ fontWeight: 900, fontSize: '28px', color: '#FFFFFF', ml: '44px', mt: '48px' }}
+              sx={{
+                fontWeight: 900,
+                fontSize: '28px',
+                fontStyle: 'normal',
+                color: '#FFFFFF',
+                ml: '41px',
+                mt: '45px',
+                lineHeight: '34px'
+              }}
             >
               Komoverse: Nexus Hub is live in Early Access!
             </Typography>
             <Button
               variant='contained'
               sx={{
-                mt: '15px',
-                ml: '44px',
+                mt: '31px',
+                ml: '41px',
+                mb: !hiddenmd ? '34px' : '20px',
+                mr: '11px',
                 borderRadius: '26px',
                 background: 'linear-gradient(180deg, #007E05 0%, #000000 100%)',
                 fontWeight: 700,
-                backgroundColor: '#fff'
+                backgroundColor: '#fff',
+                fontSize: '14px',
+                lineHeight: '17px',
+                fontStyle: 'normal'
               }}
             >
               Download Komoverse Game
@@ -97,9 +133,9 @@ const Dashboard = () => {
                 fontSize: '14px',
                 lineHeight: '17px',
                 color: '#00DB09',
-                ml: '11px',
-                verticalAlign: 'sub',
-                display: 'inline-block'
+                display: !hiddenmd ? 'inline-block' : 'block',
+                ml: '41px',
+                mb: '31px'
               }}
             >
               Read the announcement
@@ -107,12 +143,11 @@ const Dashboard = () => {
           </Box>
         </Grid>
         <Grid item xs={12} md={12}>
-          {/* <StatisticsCard /> */}
           <Box sx={{ width: '100%', typography: 'body1', border: '3px solid #fff' }}>
-            <TabContext value={value}>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <TabContext value={totalByDays}>
+              <Box sx={{ borderBottom: 1, borderColor: '#fff' }}>
                 <TabList
-                  onChange={handleChange}
+                  onChange={handleChangeTotalByDays}
                   aria-label='lab API tabs example'
                   sx={{
                     ml: '25px'
@@ -182,75 +217,128 @@ const Dashboard = () => {
                 </TabList>
               </Box>
               <TabPanel value='1'>
-                <Box sx={{ pt: '27px', pl: '26px', pb: '20px' }}>
-                  <Grid container spacing={6}>
-                    <Grid item xs={4} lg={4} md={4} container>
-                      <Grid item xs={5}>
-                        <IconButton
-                          size='small'
-                          aria-label='settings'
-                          className='card-more-options'
-                          sx={{
-                            backgroundColor: '#007E05',
-                            padding: '26px 23px',
-                            '&:hover': {
-                              backgroundColor: '#007E05',
-                              cursor: 'initial'
-                            }
-                          }}
-                        >
-                          <SvgIconStyle
-                            src={'/icons/ellipse.svg'}
-                            sx={{
-                              width: '40px',
-                              height: '31px',
-                              color: '#fff'
-                            }}
-                          />
-                        </IconButton>
+                <Box sx={{ pt: '26px', pl: '24px', pb: '17px' }}>
+                  <Grid container direction={!hiddenmd ? 'row' : 'column'} spacing={!hiddenmd ? '0' : '10'}>
+                    <Grid
+                      item
+                      xs={4}
+                      lg={4}
+                      md={4}
+                      container
+                      direction='row'
+                      justifyContent={!hiddenmd ? 'flex-start' : 'center'}
+                      alignItems='flex-start'
+                    >
+                      <Grid
+                        item
+                        sx={{
+                          width: '80px',
+                          height: '80px',
+                          mr: 4
+                        }}
+                      >
+                        <Box component='img' alt={'ellipse'} src={'/assets/images/ellipse1.png'} />
                       </Grid>
-                      <Grid item xs={7}>
+                      <Grid item>
                         <Box>
-                          <Typography sx={{ fontWeight: 700, fontSize: '14px', color: 'white' }}>
+                          <Typography
+                            sx={{
+                              fontWeight: 700,
+                              fontSize: '14px',
+                              color: 'white',
+                              lineHeight: '39px',
+                              fontStyle: 'normal'
+                            }}
+                          >
                             Total Sales
                           </Typography>
-                          <Typography sx={{ fontWeight: 700, fontSize: '32px', color: '#FFFFFF' }}>32,182</Typography>
+                          <Typography
+                            sx={{ fontWeight: 700, fontSize: '32px', color: '#FFFFFF', lineHeight: '17.07px' }}
+                          >
+                            32,182
+                          </Typography>
                         </Box>
                       </Grid>
                     </Grid>
-                    <Grid item xs={4} lg={4} md={4} container>
-                      <Grid item xs={5}>
-                        <Box
-                          component='img'
-                          alt={'ellipse'}
-                          src={'/assets/images/solana-logo-free.png'}
-                          sx={{ width: '80px', height: '80px', mr: 4 }}
-                        />
+                    <Grid
+                      item
+                      xs={4}
+                      lg={4}
+                      md={4}
+                      container
+                      direction='row'
+                      justifyContent={!hiddenmd ? 'flex-start' : 'center'}
+                      alignItems='flex-start'
+                    >
+                      <Grid
+                        item
+                        sx={{
+                          width: '80px',
+                          height: '80px',
+                          mr: 4
+                        }}
+                      >
+                        <Box component='img' alt={'solana-logo-free'} src={'/assets/images/solana-logo-free.png'} />
                       </Grid>
-                      <Grid item xs={7}>
+                      <Grid item>
                         <Box>
-                          <Typography sx={{ fontWeight: 700, fontSize: '14px', color: 'white' }}>
+                          <Typography
+                            sx={{
+                              fontWeight: 700,
+                              fontSize: '14px',
+                              color: 'white',
+                              lineHeight: '39px',
+                              fontStyle: 'normal'
+                            }}
+                          >
                             Total Volume (SOL)
                           </Typography>
-                          <Typography sx={{ fontWeight: 700, fontSize: '32px', color: '#FFFFFF' }}>4,821.32</Typography>
+                          <Typography
+                            sx={{ fontWeight: 700, fontSize: '32px', color: '#FFFFFF', lineHeight: '17.07px' }}
+                          >
+                            4,821.32
+                          </Typography>
                         </Box>
                       </Grid>
                     </Grid>
-                    <Grid item xs={4} lg={4} md={4} container>
-                      <Grid item xs={5}>
-                        <Box
-                          component='img'
-                          alt={'ellipse'}
-                          src={'/assets/images/komo1.png'}
-                          sx={{ width: '80px', height: '80px', mr: 4 }}
-                        />
+                    <Grid
+                      item
+                      xs={4}
+                      lg={4}
+                      md={4}
+                      container
+                      direction='row'
+                      justifyContent={!hiddenmd ? 'flex-start' : 'center'}
+                      alignItems='flex-start'
+                    >
+                      <Grid
+                        item
+                        sx={{
+                          width: '80px',
+                          height: '80px',
+                          mr: 4
+                        }}
+                      >
+                        <Box component='img' alt={'komo2'} src={'/assets/images/komo2.png'} />
                       </Grid>
-                      <Grid item xs={7}>
+                      <Grid item>
                         <Box>
-                          <Typography sx={{ fontWeight: 700, fontSize: '14px', color: 'white' }}>
+                          <Typography
+                            sx={{
+                              fontWeight: 700,
+                              fontSize: '14px',
+                              color: 'white',
+                              lineHeight: '39px',
+                              fontStyle: 'normal'
+                            }}
+                          >
                             Komodo Sold
                           </Typography>
-                          <Typography sx={{ fontWeight: 700, fontSize: '32px', color: '#FFFFFF' }}>1,247</Typography>
+                          <Typography
+                            sx={{ fontWeight: 700, fontSize: '32px', color: '#FFFFFF', lineHeight: '17.07px' }}
+                          >
+                            1,247
+                          </Typography>
                         </Box>
                       </Grid>
                     </Grid>
@@ -263,78 +351,234 @@ const Dashboard = () => {
             </TabContext>
           </Box>
         </Grid>
-        <Grid item xs={12} md={12} lg={12}>
-          <Box
-            component='img'
-            alt={'ellipse'}
-            src={'/11111.png'}
-            sx={{ width: '100%' }}
-          />
-        </Grid>
-        {/*
-        <Grid item xs={6} md={6} lg={6}></Grid>
-
-        <Grid item xs={12} md={6} lg={4}>
-          <WeeklyOverview />
-        </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <TotalEarning />
-        </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <Grid container spacing={6}>
-            <Grid item xs={6}>
-              <CardStatisticsVerticalComponent
-                stats='$25.6k'
-                icon={<Poll />}
-                color='success'
-                trendNumber='+42%'
-                title='Total Profit'
-                subtitle='Weekly Profit'
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <CardStatisticsVerticalComponent
-                stats='$78'
-                title='Refunds'
-                trend='negative'
-                color='secondary'
-                trendNumber='-15%'
-                subtitle='Past Month'
-                icon={<CurrencyUsd />}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <CardStatisticsVerticalComponent
-                stats='862'
-                trend='negative'
-                trendNumber='-18%'
-                title='New Project'
-                subtitle='Yearly Project'
-                icon={<BriefcaseVariantOutline />}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <CardStatisticsVerticalComponent
-                stats='15'
-                color='warning'
-                trend='negative'
-                trendNumber='-18%'
-                subtitle='Last Week'
-                title='Sales Queries'
-                icon={<HelpCircleOutline />}
-              />
-            </Grid>
+        <Grid item xs={12} md={12} container direction={!hiddenmd ? 'row' : 'column'} justifyContent='space-between'>
+          <Grid
+            item
+            sx={{
+              width: !hiddenmd ? '46%' : '100%',
+              mb: 7
+            }}
+          >
+            <Typography
+              variant='subtitle1'
+              sx={{
+                fontWeight: 700,
+                fontSize: '22px',
+                fontStyle: 'normal',
+                color: '#FFFFFF',
+                mt: '14px',
+                mb: '15px',
+                lineHeight: '27px'
+              }}
+            >
+              Recently Listed
+            </Typography>
+            <Box sx={{ width: '100%', border: '3px solid #fff' }}>
+              <TabContext value={recentListTable}>
+                <Box sx={{ borderBottom: 1, borderColor: '#fff' }}>
+                  <TabList
+                    onChange={handleChangeRecentListTable}
+                    aria-label='lab API tabs example'
+                    sx={{
+                      ml: '25px'
+                    }}
+                  >
+                    <Tab
+                      label='Komodos'
+                      style={{
+                        color: recentListTable == 1 ? '#fff' : '#777777',
+                        fontSize: '14px',
+                        lineHeight: '17px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        paddingTop: '22px',
+                        textTransform: 'none',
+                        paddingBottom: '17px',
+                        paddingleft: '7px',
+                        paddingRight: '7px'
+                      }}
+                      value='1'
+                    />
+                    <Tab
+                      label='Items'
+                      style={{
+                        // color: '#fff',
+                        color: recentListTable == 2 ? '#fff' : '#777777',
+                        fontSize: '14px',
+                        lineHeight: '17px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        paddingTop: '22px',
+                        textTransform: 'none',
+                        paddingBottom: '17px',
+                        paddingleft: '7px',
+                        paddingRight: '7px'
+                      }}
+                      value='2'
+                    />
+                    <Tab
+                      label='Gacha Heroes'
+                      style={{
+                        // color: '#fff',
+                        color: recentListTable == 3 ? '#fff' : '#777777',
+                        fontSize: '14px',
+                        lineHeight: '17px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        paddingTop: '22px',
+                        textTransform: 'none',
+                        paddingBottom: '17px',
+                        paddingleft: '7px',
+                        paddingRight: '7px'
+                      }}
+                      value='3'
+                    />
+                    <Tab
+                      label='Land'
+                      style={{
+                        color: recentListTable == 4 ? '#fff' : '#777777',
+                        // color: '#fff',
+                        fontSize: '14px',
+                        lineHeight: '17px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        paddingTop: '22px',
+                        textTransform: 'none',
+                        paddingBottom: '17px',
+                        paddingleft: '7px',
+                        paddingRight: '7px'
+                      }}
+                      value='4'
+                    />
+                  </TabList>
+                </Box>
+                <TabPanel
+                  value='1'
+                  sx={{
+                    padding: 0
+                  }}
+                >
+                  <RecentListTabs />
+                </TabPanel>
+                <TabPanel value='2'></TabPanel>
+                {/* <TabPanel value='3'>Item Three</TabPanel> */}
+                {/* <TabPanel value='4'>Item Four</TabPanel> */}
+              </TabContext>
+            </Box>
+          </Grid>
+          <Grid
+            item
+            sx={{
+              width: !hiddenmd ? '52%' : '100%',
+              mb: 7
+            }}
+          >
+            <Typography
+              variant='subtitle1'
+              sx={{
+                fontWeight: 700,
+                fontSize: '22px',
+                fontStyle: 'normal',
+                color: '#FFFFFF',
+                mt: '14px',
+                mb: '15px',
+                lineHeight: '27px'
+              }}
+            >
+              Recent Transaction
+            </Typography>
+            <Box sx={{ width: '100%', border: '3px solid #fff' }}>
+              <TabContext value={recentTransactionTable}>
+                <Box sx={{ borderBottom: 1, borderColor: '#fff' }}>
+                  <TabList
+                    onChange={handleChangeRecentTransactionTable}
+                    aria-label='lab API tabs example'
+                    sx={{
+                      ml: '20px'
+                    }}
+                  >
+                    <Tab
+                      label='Komodos'
+                      style={{
+                        color: recentTransactionTable == 1 ? '#fff' : '#777777',
+                        fontSize: '14px',
+                        lineHeight: '17px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        paddingTop: '22px',
+                        textTransform: 'none',
+                        paddingBottom: '17px',
+                        paddingleft: '7px',
+                        paddingRight: '7px'
+                      }}
+                      value='1'
+                    />
+                    <Tab
+                      label='Items'
+                      style={{
+                        // color: '#fff',
+                        color: recentTransactionTable == 2 ? '#fff' : '#777777',
+                        fontSize: '14px',
+                        lineHeight: '17px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        paddingTop: '22px',
+                        textTransform: 'none',
+                        paddingBottom: '17px',
+                        paddingleft: '7px',
+                        paddingRight: '7px'
+                      }}
+                      value='2'
+                    />
+                    <Tab
+                      label='Gacha Heroes'
+                      style={{
+                        // color: '#fff',
+                        color: recentTransactionTable == 3 ? '#fff' : '#777777',
+                        fontSize: '14px',
+                        lineHeight: '17px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        paddingTop: '22px',
+                        textTransform: 'none',
+                        paddingBottom: '17px',
+                        paddingleft: '7px',
+                        paddingRight: '7px'
+                      }}
+                      value='3'
+                    />
+                    <Tab
+                      label='Land'
+                      style={{
+                        color: recentTransactionTable == 4 ? '#fff' : '#777777',
+                        // color: '#fff',
+                        fontSize: '14px',
+                        lineHeight: '17px',
+                        fontStyle: 'normal',
+                        fontWeight: 700,
+                        paddingTop: '22px',
+                        textTransform: 'none',
+                        paddingBottom: '17px',
+                        paddingleft: '7px',
+                        paddingRight: '7px'
+                      }}
+                      value='4'
+                    />
+                  </TabList>
+                </Box>
+                <TabPanel value='1' sx={{
+                  m: 0,
+                  p: 0
+                }}>
+                  <RecentTransaction />
+                </TabPanel>
+                {/* <TabPanel value='2'>Item Two</TabPanel> */}
+                {/* <TabPanel value='3'>Item Three</TabPanel> */}
+                {/* <TabPanel value='4'>Item Four</TabPanel> */}
+              </TabContext>
+            </Box>
           </Grid>
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
-          <SalesByCountries />
-        </Grid>
-        <Grid item xs={12} md={12} lg={8}>
-          <DepositWithdraw />
-        </Grid>
-        <Grid item xs={12}>
-          <Table />
-        </Grid> */}
       </Grid>
     </ApexChartWrapper>
   )

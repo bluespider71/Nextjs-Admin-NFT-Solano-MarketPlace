@@ -85,7 +85,6 @@ const Navigation = props => {
     }
   }
   const ScrollWrapper = hidden ? Box : PerfectScrollbar
-  console.log(props)
 
   return (
     <Drawer toggleNavVisibility={toggleNavVisibility} {...props}>
@@ -136,11 +135,11 @@ const Navigation = props => {
         BwkQ...prW7
       </Button>
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-          <List className='nav-items' sx={{ transition: 'padding .25s ease', mx: 3.75, py: 1 }}>
-            <VerticalNavItems {...props} verticalNavItems={VerticalNavItemDatas('user')} />
-          </List>
-        </Box>
+      <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <List className='nav-items' sx={{ transition: 'padding .25s ease', mx: 3.75, py: 1 }}>
+          <VerticalNavItems {...props} verticalNavItems={VerticalNavItemDatas('user')} />
+        </List>
+      </Box>
     </Drawer>
   )
 }

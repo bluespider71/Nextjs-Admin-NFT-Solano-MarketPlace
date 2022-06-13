@@ -76,7 +76,7 @@ const MenuDrawer = props => {
         '& .MuiDrawer-paper': {
           borderRight: 1,
           borderColor: theme.palette.navigatorBorderColor,
-          backgroundColor: theme.palette.background.default
+          backgroundColor: theme.palette.background.default,
         }
       }}
     >
