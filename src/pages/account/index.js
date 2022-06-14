@@ -61,12 +61,14 @@ const Account = () => {
   // ** State
 
   return (
-    <>
+    <Box sx={{
+      mb: "30px"
+    }}>
       <Box
         sx={{
           pt: '29px',
           pb: '22px',
-          borderBottom: '1px solid #AAAAAA'
+          borderBottom: '1px solid #AAAAAA',
         }}
       >
         <Box
@@ -361,7 +363,7 @@ const Account = () => {
           </Grid>
         </Grid>
       </Box>
-    </>
+    </Box>
   )
 }
 

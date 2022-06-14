@@ -80,6 +80,7 @@ const Dashboard = () => {
         mt: '23px',
         ml: '10px',
         mr: '27px',
+        mb: '40px',
         p: 6
       }}
     >

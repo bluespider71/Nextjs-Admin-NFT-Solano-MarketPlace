@@ -1,6 +1,8 @@
 // ** MUI Imports
 import Box from '@mui/material/Box'
 import { useTheme } from '@mui/material/styles'
+import { Typography } from '@mui/material'
+
 
 // ** Footer Content Component
 import FooterContent from './FooterContent'
@@ -20,23 +22,31 @@ const Footer = props => {
       component='footer'
       className='layout-footer'
       sx={{
-        zIndex: 10,
+        zIndex: 10000,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        height: "50px",
+        // position: "absolute",
+        // bottom: 0,
+        // left: 0,
+        // right: 0,
+        width: "100%",
+        bgcolor: "#252525",
       }}
     >
-      <Box
-        className='footer-content-container'
-        sx={{
-          width: '100%',
-          borderTopLeftRadius: 14,
-          borderTopRightRadius: 14,
-          padding: theme.spacing(4, 6),
-          ...(contentWidth === 'boxed' && { '@media (min-width:1440px)': { maxWidth: 1440 } })
-        }}
-      >
-        {userFooterContent ? userFooterContent(props) : <FooterContent />}
+      <Box>
+        <Typography
+          variant='body1'
+          sx={{
+            fontWeight: 400,
+            fontSize: '12px',
+            lineHeight: '15px',
+            color: '#FFFFFF'
+          }}
+        >
+          Copyright 2022 PT. Komodo Legends Interaktif
+        </Typography>
       </Box>
     </Box>
   )

@@ -61,7 +61,8 @@ const MarketPlace = () => {
   return (
     <Box
       sx={{
-        pt: '32.4px'
+        pt: '32.4px',
+        mb: "50px"
       }}
     >
       <Box

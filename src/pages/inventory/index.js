@@ -22,7 +22,7 @@ import TabSecurity from 'src/views/account-settings/TabSecurity'
 import SvgIconStyle from '../../@core/components/SvgIconStyle'
 
 import Komodos from 'src/views/inventory/Komodos'
-import ItemDetail from 'src/views/market-place/ItemDetail'
+import ItemDetail from 'src/views/inventory/ItemDetail'
 
 // ** Third Party Styles Imports
 import 'react-datepicker/dist/react-datepicker.css'
@@ -72,7 +72,8 @@ const Inventory = () => {
   return (
     <Box
       sx={{
-        pt: '35px'
+        pt: '35px',
+        mb: "50px"
       }}
     >
       <Box
@@ -159,7 +160,7 @@ const Inventory = () => {
         <TabPanel sx={{ p: 0 }} value='1'>
           <Komodos></Komodos>
         </TabPanel>
-        <TabPanel sx={{ p: 0 }} value='2'></TabPanel>
+        <TabPanel sx={{ p: 0 }} value='2'><ItemDetail /></TabPanel>
         <TabPanel sx={{ p: 0 }} value='3'></TabPanel>
         <TabPanel sx={{ p: 0 }} value='4'></TabPanel>
       </TabContext>

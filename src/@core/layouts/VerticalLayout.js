@@ -21,6 +21,7 @@ import ScrollToTop from 'src/@core/components/scroll-to-top'
 
 // ** Styled Component
 import DatePickerWrapper from 'src/@core/styles/libs/react-datepicker'
+import { Typography } from '@mui/material'
 
 const VerticalLayoutWrapper = styled('div')({
   height: '100%',
@@ -102,18 +103,19 @@ const VerticalLayout = props => {
             {children}
           </ContentWrapper>
 
-          {/* <Footer {...props} /> */}
-
           <DatePickerWrapper sx={{ zIndex: 11 }}>
             <Box id='react-datepicker-portal'></Box>
           </DatePickerWrapper>
         </MainContentWrapper>
       </VerticalLayoutWrapper>
+      <Footer {...props}></Footer>
 
       {scrollToTop ? (
         scrollToTop(props)
       ) : (
-        <ScrollToTop className='mui-fixed'>
+        <ScrollToTop className='mui-fixed' sx={{
+          zIndex: "100000"
+        }}>
           <Fab color='primary' size='small' aria-label='scroll back to top'>
             <ArrowUp />
           </Fab>

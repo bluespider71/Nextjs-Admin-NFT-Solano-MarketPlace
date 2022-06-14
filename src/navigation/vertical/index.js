@@ -65,7 +65,7 @@ const navigation = auth => {
       {
         title: 'Komodo Express',
         icon: Komodo_Express,
-        path: '/typography'
+        path: '/komodo_express'
       }
     ]
   } else if (auth == 'user') {
