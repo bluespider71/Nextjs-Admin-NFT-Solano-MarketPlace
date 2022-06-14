@@ -22,6 +22,7 @@ import TabSecurity from 'src/views/account-settings/TabSecurity'
 
 
 import Komodos from 'src/views/market-place/Komodos'
+import ItemDetail from 'src/views/market-place/ItemDetail'
 
 
 
@@ -152,7 +153,9 @@ const MarketPlace = () => {
         <TabPanel sx={{ p: 0 }} value='1'>
           <Komodos></Komodos>
         </TabPanel>
-        <TabPanel sx={{ p: 0 }} value='2'></TabPanel>
+        <TabPanel sx={{ p: 0 }} value='2'>
+          <ItemDetail></ItemDetail>
+        </TabPanel>
         <TabPanel sx={{ p: 0 }} value='3'></TabPanel>
         <TabPanel sx={{ p: 0 }} value='4'></TabPanel>
       </TabContext>

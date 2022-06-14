@@ -438,6 +438,7 @@ const Dashboard = () => {
                       label='Land'
                       style={{
                         color: recentListTable == 4 ? '#fff' : '#777777',
+
                         // color: '#fff',
                         fontSize: '14px',
                         lineHeight: '17px',
@@ -552,6 +553,7 @@ const Dashboard = () => {
                       label='Land'
                       style={{
                         color: recentTransactionTable == 4 ? '#fff' : '#777777',
+
                         // color: '#fff',
                         fontSize: '14px',
                         lineHeight: '17px',
