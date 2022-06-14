@@ -78,7 +78,7 @@ const navigation = auth => {
       {
         title: 'Inventory',
         icon: Inventory,
-        path: '/market-place'
+        path: '/inventory'
       },
     ]
   }
